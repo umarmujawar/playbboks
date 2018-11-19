@@ -1,0 +1,14 @@
+--- # Gather EC2 facts from remote instance
+- hosts: amazon-linux
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Gather the EC2 facts about running isnatnces
+    action: ec2_metadata_facts
+  - name: Display the conditional instance type
+    debug: msg='This is instance type t2.micro'
+    when: ansible_ec2_instance_type == 't2.micro'
+

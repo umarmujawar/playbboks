@@ -1,0 +1,16 @@
+- name: managing ec2 state
+  hosts: localhost
+  connection: local
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks: 
+  - name: make sure the instance is started
+    ec2:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}"
+      region: "{{ aws_region }}"
+      instance_ids: i-07c80e905dff9417e
+      state: running

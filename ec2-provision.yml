@@ -1,0 +1,23 @@
+- name: provision the ec2s
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+  - name: creating two t2.micro instances
+    ec2:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}"
+      region: "{{ aws_region }}"
+      assign_public_ip: yes
+      count: 2
+      group_id: sg-0cdad4d0f909fa66c
+      image: ami-013be31976ca2c322
+      vpc_subnet_id: subnet-ae2fb784
+      termination_protection: no
+      instance_type: t2.micro
+      key_name: Ansible

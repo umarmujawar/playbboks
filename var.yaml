@@ -1,0 +1,13 @@
+---
+- name: This sets up an httpd webserver
+  hosts: '{{ myhosts }}'
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: '{{ gather }}'
+  tasks:
+  - name: Install indicated packages 
+    yum:
+      name: '{{ pkg }}'
+      state: latest
+

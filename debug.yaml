@@ -1,0 +1,12 @@
+- name: This sets up an httpd webserver
+  hosts: amazon-linux
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  tasks:
+  - name: Install telnet package
+    yum:
+      name: telnet
+      state: latest
+    register: result
+  - debug: var=result 

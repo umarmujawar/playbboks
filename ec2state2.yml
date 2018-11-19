@@ -1,0 +1,16 @@
+- name: start the instance
+  hosts: localhost
+  connection: local
+  become: yes
+  become_method: sudo 
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks: 
+  - name: start the ubuntu server
+    ec2: 
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}"
+      aws_region: "{{ aws_region }}"
+      instance_ids: ['i-0967a13b2337d33e3', 'i-07c80e905dff9417e']
+      state: stopped 

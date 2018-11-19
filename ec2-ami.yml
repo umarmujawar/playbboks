@@ -1,0 +1,23 @@
+- name: This play book will create AMI of given instance id
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+  - name: creating ec2 ami from below instance id
+    ec2_ami:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}"
+      region: "{{ aws_region }}"
+      instance_id: i-06e6e5cb59f9d7a4f
+      no_reboot: yes
+      name: Ansible-master-ami
+      wait: no
+      tags:
+        Name: Ansible-master-AMI
+        Service: Ansible-Server
+    register: instance

@@ -1,0 +1,17 @@
+- name: This sets up an nginx webserver
+  hosts: amazon-linux
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  tasks:
+  - name: Install nginx packages
+    yum:
+      name: nginx
+      state: present
+    notify:
+    - ensure httpd is running
+  handlers: 
+  - name: ensure httpd is running
+    service:
+      name: httpd
+      state: restarted

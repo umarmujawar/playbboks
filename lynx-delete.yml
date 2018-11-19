@@ -1,0 +1,10 @@
+- name: host info for lynx installation
+  hosts: amazon-linux
+  connection: ssh
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  tasks:
+  - name: install the package for lynx browser
+    yum: pkg=lynx state=absent update_cache=true

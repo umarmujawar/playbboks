@@ -1,0 +1,17 @@
+- name: terminate the servers on AWS
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+  - name: terminate the below instances
+    ec2:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}"
+      region: "{{ aws_region }}"
+      instance_ids: ['i-04259dcab3fc53ad5', 'i-0cf4b351f8b928970']
+      state: absent 
