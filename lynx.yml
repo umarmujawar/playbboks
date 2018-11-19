@@ -1,4 +1,4 @@
-- name: host info for lynx installation-1
+- name: host info for lynx installation-2
   hosts: amazon-linux
   connection: ssh
   remote_user: ansible
